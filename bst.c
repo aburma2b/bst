@@ -81,6 +81,8 @@ int main (void)
 void construct_bst(node* root, int value)
 {
 
+    
+        if(root == NULL) return;
 
 	if(value < root->data){
 		
@@ -137,6 +139,7 @@ node* search_bst(node* root, int value)
 
 void  delete_node(node* root, int value)
 {
+        if(root == NULL) return;
 	//If you delete a parent node all children get deleted
 	node* node_to_del;	
 	node_to_del = search_bst(root, value);
@@ -145,15 +148,22 @@ void  delete_node(node* root, int value)
 
 void traverse_bst(node* root, list_node** ptr_to_head)
 {
+
+        
 	if(root != NULL){
 		traverse_bst(root->low, ptr_to_head);
 		process_node(root->data, ptr_to_head);
 		traverse_bst(root->high, ptr_to_head);
 	}
+
+        else return;
 }	
 
 void process_node(int data, list_node**  ptr_to_head)
 {
+
+        if(ptr_to_head == NULL) return;
+
 	list_node* head = malloc(sizeof(list_node));
 	if(head == NULL){
 		printf("Out of memory \n");
@@ -167,6 +177,8 @@ void process_node(int data, list_node**  ptr_to_head)
 
 void print_list(list_node** ptr_to_head)
 {
+
+        if(ptr_to_head == NULL) return;
 
 	list_node* current = *ptr_to_head;
 
