@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
 #include "bst.h"
 
 //Function for constructing a bst recursively. 
@@ -49,8 +53,8 @@ void construct_bst(node* root, int value)
 
 //Function to recursively  search the bst to see \
 if the passed value is already in the tree.
-//A root to a bst needs to be passed to the function
-//This functions returns the node which holds the value requested 
+//A root to a bst needs to be passed to the function.
+//This functions returns the node which holds the value requested. 
 node* search_bst(node* root, int value)
 {		
     if(root != NULL){
@@ -67,12 +71,10 @@ node* search_bst(node* root, int value)
 	    search_bst(root->high, value);
 	}
     
-	else{
-	     return NULL;
-	}
+	else return NULL;
     }
 
-    else return;
+    else return NULL;
 }
 
 
@@ -113,7 +115,7 @@ void traverse_bst(node* root, list_node** ptr_to_head)
 //Function is passed a value, which is then added on to a linked list.
 //A new node is created for each data value. Each new node becomes the new head.
 //A pointer to a pointer is passed to the function because \
-the poi
+whenever a new node is added, the new node becomes the head.
 void process_node(int data, list_node**  ptr_to_head)
 {
 
@@ -133,6 +135,9 @@ void process_node(int data, list_node**  ptr_to_head)
     else return;
 }
 
+
+//Simple print list function. Iterated over the linked list \
+and prints it out.
 void print_list(list_node** ptr_to_head)
 {
 
@@ -149,7 +154,9 @@ void print_list(list_node** ptr_to_head)
     else return;
 }
 
-	
+
+//In a bst the left most node is alwayd the lowest value.
+//Recursively finds the left most node and returns it.
 node* min_value_rec(node* root)
 {
     if(root != NULL){
@@ -162,7 +169,7 @@ node* min_value_rec(node* root)
 	}
     }
 
-    else return;
+    else return NULL;
 }
 	
 

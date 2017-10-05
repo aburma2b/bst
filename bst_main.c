@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdbool.h>
 #include <string.h>
+#include <stdbool.h>
 #include "bst.h"
 
 
@@ -25,8 +25,8 @@ int main (void)
 	list_node** ptr_to_head = &head;
 	
 	while(true){
-		printf("Would you like to input something into BST \
-                (0:exit, 1:input, 2:search, 3:del, 4:traverse): ");
+		printf("Would you like to input something into BST "
+                "(0:exit, 1:input, 2:search, 3:del, 4:traverse): ");
 		scanf("%d", &continue_input);
 		if(continue_input == 0) break;
 		//printf("\n");
@@ -53,7 +53,8 @@ int main (void)
 			printf("Enter an integer to delete: ");
 			scanf("%d", &data);
 			delete_node(root, data);
-			printf("Value and node deleted\n");
+			printf("Value, node deleted, and all children nodes "
+                        "deleted \n");
 		}
 
 		else if(continue_input == 4){
