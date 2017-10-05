@@ -1,4 +1,90 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
 #include "bst.h"
+
+
+typedef struct node{
+	int data;
+  	struct node* low;
+	struct node* high;
+} node;
+
+typedef struct list_node{
+	int data;
+	struct list_node* next;
+} list_node;
+
+void construct_bst(node* root, int value);
+node* search_bst(node* root, int value); 
+void delete_node(node* root, int value);
+void traverse_bst(node* root, list_node** ptr_to_head); 
+void process_node(int data, list_node** ptr_to_head);
+void print_list(list_node** ptr_to_head);
+node* inorder_successor(node* root);
+node* min_value_rec(node* root);
+
+int main (void)
+{
+
+	int continue_input; 
+	int data;
+	node* temp;
+
+	node* root = malloc(sizeof(node));
+        if(root == NULL){
+            printf("Out of memory \n");
+            return 1;
+        }
+	printf("Enter a data value for root: ");
+	scanf("%d", &root->data);
+	printf("\n");
+
+	list_node* head = NULL;
+	list_node** ptr_to_head = &head;
+	
+	while(true){
+		printf("Would you like to input something into BST \
+                (0:exit, 1:input, 2:search, 3:del, 4:traverse): ");
+		scanf("%d", &continue_input);
+		if(continue_input == 0) break;
+		//printf("\n");
+                 
+		else if(continue_input == 1){
+			printf("Enter an integer: ");
+			scanf("%d", &data);
+			construct_bst(root, data);
+			printf("Data successfully entered into BST \n");
+		}
+
+		else if(continue_input == 2){
+			printf("Enter an integer to search for: ");
+			scanf("%d", &data);
+			temp = search_bst(root, data);
+
+			if(temp != NULL){
+				printf("Value found in BST: %d\n", temp->data);
+			}
+			else printf("Value not in BST\n");
+		}
+
+		else if(continue_input == 3){
+			printf("Enter an integer to delete: ");
+			scanf("%d", &data);
+			delete_node(root, data);
+			printf("Value and node deleted\n");
+		}
+
+		else if(continue_input == 4){
+			printf("Traversing BST and printing out all values. \n");
+			traverse_bst(root, ptr_to_head);
+			print_list(ptr_to_head);
+		}
+	}
+}
+
+
 
 //Function for constructing a bst recursively. 
 //A pointer to an already allocated root needs to be passed. 
@@ -164,5 +250,4 @@ node* min_value_rec(node* root)
 
     else return;
 }
-	
-
+		
