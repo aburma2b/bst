@@ -154,7 +154,26 @@ void print_list(list_node** ptr_to_head)
     else return;
 }
 
+//Iterates over all linked list nodes and deletes them
+void delete_list(list_node** ptr_to_head)
+{
 
+    if(ptr_to_head != NULL){
+
+       list_node* current = *ptr_to_head, next = NULL;
+       free(ptr_to_head);
+
+       while(current !- NULL){
+           next = current->next;
+           free(current);
+           current = next;
+        }
+    }
+
+    else return;
+}
+
+           
 //In a bst the left most node is alwayd the lowest value.
 //Recursively finds the left most node and returns it.
 node* min_value_rec(node* root)

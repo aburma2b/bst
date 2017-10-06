@@ -61,8 +61,11 @@ int main (void)
 			printf("Traversing BST and printing out all values. \n");
 			traverse_bst(root, ptr_to_head);
 			print_list(ptr_to_head);
+                        delete_list(ptr_to_head);
 		}
 	}
+
+        return;
 }
 
 
