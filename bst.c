@@ -99,6 +99,8 @@ void  delete_node(node* root, int value)
 is formed which holds all the values of the bst.
 //Each linked list should reflect exactly how a bst was contructed and in \
 in what order values were input into the bst.
+//*****BUG: Traversing and printing does something weird after a node is\
+deleted from the BST.******
 void traverse_bst(node* root, list_node** ptr_to_head)
 {
         
@@ -160,14 +162,15 @@ void delete_list(list_node** ptr_to_head)
 
     if(ptr_to_head != NULL){
 
-       list_node* current = *ptr_to_head, next = NULL;
-       free(ptr_to_head);
+       list_node* current = *ptr_to_head;
+       list_node* next = NULL;
 
-       while(current !- NULL){
+       while(current !=  NULL){
            next = current->next;
            free(current);
            current = next;
         }
+
     }
 
     else return;

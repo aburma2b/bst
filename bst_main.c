@@ -59,13 +59,17 @@ int main (void)
 
 		else if(continue_input == 4){
 			printf("Traversing BST and printing out all values. \n");
+                        // *****BUG: Traversing and printing does something weird \
+                        after a node is deleted from the BST.******
 			traverse_bst(root, ptr_to_head);
 			print_list(ptr_to_head);
                         delete_list(ptr_to_head);
+                        head = NULL;
+                        ptr_to_head = &head;
 		}
 	}
 
-        return;
+        return 0;
 }
 
 
