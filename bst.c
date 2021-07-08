@@ -33,7 +33,7 @@ void construct_bst(node* root, int value)
 		if(root->high == NULL){
 			root->high = malloc(sizeof(node));
                         if(root->high == NULL){
-                           printf("Could not allocate me");
+                           printf("Could not allocate memory");
                            return;
                         }
 			root->high->data = value;
