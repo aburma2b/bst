@@ -20,6 +20,8 @@ void construct_bst(node* root, int value)
                             return;
                         }
 			root->low->data = value;
+			root->low->high = NULL;
+			root->low->low = NULL;
 		}
 		else{
 			construct_bst(root->low, value);
@@ -35,6 +37,8 @@ void construct_bst(node* root, int value)
                            return;
                         }
 			root->high->data = value;
+			root->high->high = NULL;
+			root->high->low = NULL;
 		}
 		else{
 			construct_bst(root->high, value);
