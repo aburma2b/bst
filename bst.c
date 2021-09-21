@@ -4,55 +4,92 @@
 #include <stdbool.h>
 #include "bst.h"
 
+struct node* init_node(node* bst_node, int value)
+{
+    if(bst_node == NULL){
+        bst_node = (node*) malloc(sizeof(node));
+        if(bst_node == NULL){
+            fprintf(stderr, "Could not allocate memory\n");
+            return NULL;
+        }
+    }        
+    
+    if(bst_node != NULL){
+        bst_node->data = value;
+        bst_node->low = NULL;
+        bst_node->high = NULL;
+    }
+
+	else{
+		fprintf(stderr, "For some reason the pointer is still NULL!\n");
+		return NULL;
+	}
+
+    return bst_node;
+}
+
+
 //Function for constructing a bst recursively. 
-//A pointer to an already allocated root needs to be passed. 
+//A pointer to root needs to be passed to the function, the function will allocate\
+it automatically if value of root is NULL. 
 void construct_bst(node* root, int value)
 {
-
-    if(root != NULL){
-
-	if(value < root->data){
-		
-		if(root->low == NULL){
-			root->low = malloc(sizeof(node));
-                        if(root->low == NULL){
-                            printf("Could not allocate memory");
-                            return;
-                        }
-			root->low->data = value;
-			root->low->high = NULL;
-			root->low->low = NULL;
-		}
-		else{
-			construct_bst(root->low, value);
-		}
+	if(root == NULL){
+		root = init_node(root, value);
+		return; 
 	}
+    
+    else if(root != NULL){
 
-	else if(value > root->data){
+	    if(value < root->data){
 		
-		if(root->high == NULL){
-			root->high = malloc(sizeof(node));
-                        if(root->high == NULL){
-                           printf("Could not allocate memory");
-                           return;
-                        }
-			root->high->data = value;
-			root->high->high = NULL;
-			root->high->low = NULL;
-		}
-		else{
-			construct_bst(root->high, value);
-		}
-	}
+		    if(root->low == NULL){
+                root->low = init_node(root->low, value);    
+		    }
+		    else{
+			    construct_bst(root->low, value);
+		    }
+	    }   
+
+	    else if(value > root->data){
+		
+	       if(root->high == NULL){
+		       root->high = init_node(root->high, value);
+		    }
+		    else{
+			    construct_bst(root->high, value);
+		    }
+	   }
 	
-	else return;
+	    else return;
     }
 
-    else{
-        printf("Root passed to function was null. BST could not be constructed");
-        return;
-    }
+    return;
+
 }
+
+
+/*
+//Another implementation of construct_bst, the code lookes cleaner\
+but runs a lot slower most probably because it has to access memory\
+for every recursive call.
+struct node* construct_bst(node* root, int value, int position_of_data)
+{
+    if(root == NULL){
+        return init_node(root, value, position_of_data);  
+    }
+
+    else if(value < root->data){
+        root->low = construct_bst(root->low, value, position_of_data);
+    }
+
+    else if(value > root->data){
+        root->high = construct_bst(root->high, value, position_of_data);
+    }
+
+    return root;
+}
+*/
 
 
 //Function to recursively  search the bst to see \

@@ -13,7 +13,7 @@ typedef struct list_node{
 	struct list_node* next;
 } list_node;
 
-
+struct node* init_node(node* bst_node, int value);
 void construct_bst(node* root, int value);
 node* search_bst(node* root, int value); 
 void delete_node(node* root, int value);

@@ -12,6 +12,8 @@ int main (void)
 	int data;
 	node* temp;
 
+	node* root = NULL;
+/*
 	node* root = malloc(sizeof(node));
         if(root == NULL){
             printf("Out of memory \n");
@@ -20,7 +22,7 @@ int main (void)
 	printf("Enter a data value for root: ");
 	scanf("%d", &root->data);
 	printf("\n");
-
+*/
 	list_node* head = NULL;
 	list_node** ptr_to_head = &head;
 	
