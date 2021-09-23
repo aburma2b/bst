@@ -4,6 +4,10 @@
 #include <stdbool.h>
 #include "bst.h"
 
+static node* root = NULL;
+static node** root_addr = &root;
+static void input_bst(node** root_addr, int data);
+
 
 int main (void)
 {
@@ -11,32 +15,24 @@ int main (void)
 	int continue_input; 
 	int data;
 	node* temp;
-
-	node* root = NULL;
-/*
-	node* root = malloc(sizeof(node));
-        if(root == NULL){
-            printf("Out of memory \n");
-            return 1;
-        }
-	printf("Enter a data value for root: ");
-	scanf("%d", &root->data);
-	printf("\n");
-*/
 	list_node* head = NULL;
 	list_node** ptr_to_head = &head;
 	
 	while(true){
+
 		printf("Would you like to input something into BST "
                 "(0:exit, 1:input, 2:search, 3:del, 4:traverse): ");
 		scanf("%d", &continue_input);
-		if(continue_input == 0) break;
-		//printf("\n");
+
+		if(continue_input == 0) {
+            printf("Exiting\n");
+			break;
+		} 
                  
 		else if(continue_input == 1){
 			printf("Enter an integer: ");
 			scanf("%d", &data);
-			construct_bst(root, data);
+			input_bst(root_addr, data);
 			printf("Data successfully entered into BST \n");
 		}
 
@@ -74,6 +70,18 @@ int main (void)
         return 0;
 }
 
+static void input_bst(node** root_addr, int data)
+{
+   if(root == NULL){
+	   *root_addr = init_node(root, data);
+	   return;
+   }
 
+   else{
+	   construct_bst(root, data);
+	   return;
+   }
 
+   return;
+}
 		

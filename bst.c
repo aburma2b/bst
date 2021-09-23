@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "bst.h"
 
+//Function to initialize and allocate memory for a node.
 struct node* init_node(node* bst_node, int value)
 {
     if(bst_node == NULL){
@@ -30,16 +31,18 @@ struct node* init_node(node* bst_node, int value)
 
 
 //Function for constructing a bst recursively. 
-//A pointer to root needs to be passed to the function, the function will allocate\
-it automatically if value of root is NULL. 
+//A pointer to root needs to be passed to this function. \
+The root node needs to be initialized by calling init_node before \
+it is passed to this function. The reason is that if a pointer with \
+NULL is passed to this function, even if there is a mechanism for initializing\
+a node within the function, the function can not modify variables outside its scope,\
+Unless root is passed by reference but I do not want to deal with pointers to pointers.\
+The other construct_bst can be used if it is required that construct_bst handle all\
+initializations and memory allocations. 
 void construct_bst(node* root, int value)
 {
-	if(root == NULL){
-		root = init_node(root, value);
-		return; 
-	}
-    
-    else if(root != NULL){
+	
+    if(root != NULL){
 
 	    if(value < root->data){
 		
@@ -64,6 +67,11 @@ void construct_bst(node* root, int value)
 	    else return;
     }
 
+    else {
+        fprintf(stderr, "Null pointer was passed to construct_bst function.\n");
+        return;
+    }
+
     return;
 
 }
@@ -72,7 +80,9 @@ void construct_bst(node* root, int value)
 /*
 //Another implementation of construct_bst, the code lookes cleaner\
 but runs a lot slower most probably because it has to access memory\
-for every recursive call.
+for every recursive call. This function can also handle allocating\
+memory and initializing nodes if the root variable is passed with a\
+value of NULL.
 struct node* construct_bst(node* root, int value, int position_of_data)
 {
     if(root == NULL){
